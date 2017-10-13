@@ -1,4 +1,4 @@
-# Lesson for October 12, 2017
+# Lesson for October 14, 2017
 
 ### Agenda
 ###
