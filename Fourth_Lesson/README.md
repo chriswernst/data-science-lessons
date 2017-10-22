@@ -1,4 +1,4 @@
-# Lesson for October 23, 2017
+# Lesson for October 18, 2017
 
 ###
 ###
@@ -30,12 +30,30 @@ def myPythonFunction(requirement1,requirement2):
 	return req3
 ```
 ###
+- Set the directory in Python
+###
+- Libraries and their relation to functions
+###
 - Referencing Functions in libraries: `import ____________` & `from ______ import *` & `import _______ as ___`
 ###
 - Imitate the above to write your own
 ###
+- Comments/ Documentation
+###
+- camelCase
+###
+- THIS_IS_A_CONSTANT
+###
+- thisIsAVariable
+###
 ###
 
+###### A mention of defining entire programs in functions
+
+###
+###
+
+##### **3.** Python Loops
 ###
 **Definite Loops - for**
 
@@ -61,22 +79,6 @@ while x>10:
 
 ```
 
-
-#
-Markdown
-dillinger.io
-
-###
-###
-
-##### **3.** Python Pandas
-Python Data Analysis
-
-`import pandas as pd`
-
-Click here to learn more about Pandas: (http://pandas.pydata.org/)
-
-View `intro_to_pandas.py`
 
 
 ###
