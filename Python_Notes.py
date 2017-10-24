@@ -1,7 +1,7 @@
 '''
 PYTHON 3.5 NOTES
 
-Last Updated 10/7/2017
+Last Updated 10/19/2017
 
 Might want to use Spyder 3.5 or iPython in order to have access to all libraries
   - and DON'T use pip3 to update libraries when using Anaconda
@@ -78,8 +78,41 @@ del
 clear
 # clears console
 
+
+myList = [0,1,2,3]
+# Generate a list
+
+len(myList)
 # Gives length of list
-len(listName)
+
+myList.extend([4])
+# add on an element
+
+myList.insert(4,'e')
+# add an element to the 4th position
+
+myNewList = [8,12,16,20]
+# Create a new list
+
+myList.append(myNewList)
+# add using append
+
+myList.extend(myNewList)
+#add using extend
+
+# enumerate - number the elements of a list
+a=['t','j','k','f','b','n']
+
+for i in enumerate(a, 3): # if no second positional argument is given, it will start at 0.
+  print(i)
+
+# OUTPUTS
+(3, 't')
+(4, 'j')
+(5, 'k')
+(6, 'f')
+(7, 'b')
+(8, 'n')
 
 
 # continues to the next line without executing '\
@@ -790,6 +823,13 @@ time.sleep(2)
 time.ctime()
 # Outputs 'Tue Jan 17 17:54:05 2017'
 
+start = time.time()
+
+end =  time.time()
+
+print(end -  start)
+# time elapsed
+
 
 
 ##########################################################  DATE TIME MODULE ######################
@@ -831,6 +871,44 @@ for (who, job, pay) in curs.fetchall():
 payscale = curs.execute("select * from emp where pay > 90")
 payscale.fetchall()
 # outputs all employees making > 90
+
+
+
+
+
+############################################################### GLOB MODULE ##########################
+import glob
+import os
+
+os.chdir('path/to/image/folders/')
+
+images = glob.glob('*.jpg')
+# Creates a list of images from the given directory that end in .jpg
+
+cars = []
+notcars = []
+for image in images:
+    if 'image' in image or 'extra' in image:
+        notcars.append(image)
+    else:
+        cars.append(image)
+# a useful classifier
+
+
+
+############################################################### SKLEARN MODULE ##########################
+from sklearn import svm
+from sklearn.preprocessing import StandardScaler
+from sklearn.cross_validation import train_test_split # OR
+from sklearn.model_selection import train_test_split # >V0.18 Scikit-learn
+
+# see more on svm.py and svm_image_classifier.py
+
+# It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or a callable
+svc = svm.SVC(kernel='linear').fit(X, y)
+
+# READ THE DOCS: http://scikit-learn.org/stable/modules/classes.html#module-sklearn.svm
+# http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
 
 
 

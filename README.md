@@ -1,4 +1,4 @@
-# Lesson for October 23, 2017
+# Lesson for October 24, 2017
 
 ###
 ###
@@ -63,7 +63,7 @@ while x>10:
 
 
 #
-Markdown
+**Markdown**
 dillinger.io
 
 ###
@@ -80,7 +80,7 @@ View `intro_to_pandas.py`
 
 
 ###
-##### **4.** Your First Program - *Hello World*
+##### **4.** Your First Program 
 ###
 - Pseudocode
 ###
@@ -89,6 +89,5 @@ View `intro_to_pandas.py`
 - Program Development Process
 ###
 - Reference a function in another python file (Remember directory management)
-### 
-- Use the `requests` and `bs4` libraries to create a script
+
 
