@@ -1,4 +1,4 @@
-# Lesson for October 26, 2017
+# Lesson for October 24, 2017
 
 ###
 ###
@@ -69,22 +69,25 @@ dillinger.io
 ###
 ###
 
-**Defining Multiple Variables**
+##### **3.** Python Pandas
+Python Data Analysis
 
+`import pandas as pd`
 
+Click here to learn more about Pandas: (http://pandas.pydata.org/)
+
+View `intro_to_pandas.py`
 
 
 ###
-##### **3.** Variables, Keywords, Operators
+##### **4.** Your First Program 
 ###
-Variables
-a=6
-a=a*32
+- Pseudocode
 ###
-Keywords
+- Readability, Spacing, Comments
 ###
-Operators
-***see Sixth_Lesson
-
+- Program Development Process
+###
+- Reference a function in another python file (Remember directory management)
 
 
