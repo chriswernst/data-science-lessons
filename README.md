@@ -37,6 +37,7 @@ Define the Function:
 ```
 def pythagoreanTheorem(a,b):
     c = a**2 + b**2
+    print("The hypoteneuse is: ", c)
     return c
 ```
 Call the Function:
@@ -58,8 +59,16 @@ exponentiation, division = thisNewFunction(a=323, m=13)
 **Keywords:**
 ```
 import keyword
-keyword.kwlist
-dir(__builtins__)
+keywords = keyword.kwlist
+len(keywords)
+```
+There are 33 keywords
+
+```
+allBuiltins = dir(__builtins__)
+errors = allBuiltins[:70]
+builtins = allBuiltins[79:]
+
 ```
 *keywords* should turn **blue**, and *functions* should turn **purple** when typed into **Spyder.**
 ###
