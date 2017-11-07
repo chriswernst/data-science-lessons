@@ -1,5 +1,9 @@
 
-### Lesson for November 7, 2017
+# Lesson for November 7, 2017
+###
+
+![alt text](https://github.com/chriswernst/data-science-lessons/blob/master/DataScience.jpg?raw=true)
+
 ###
 
 ### Agenda
