@@ -167,6 +167,7 @@ b2
 # To get a list of keywords:
 import keyword
 print(keyword.kwlist)
+keywords = keyword.kwlist
 # OUTPUTS
 
 ['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 
@@ -205,7 +206,7 @@ import pylab
 import os
 import io
 import webbrowser
-import requests
+import requests()  
 import datetime
 import time
 import bs4
@@ -553,9 +554,32 @@ plt.show()
 
 import numpy as np
 
-np.mean(yellowPixels[:,:,0])
-# gives the average of all rows, all columns, and the first of the tuples. This is for an RGB average. Specifically, "Red"
+np.array([0,3,4])
+# Creates an array
 
+np.matrix([[0,1],[3,2]])
+np.matrix('0 1; 3 2')
+# Both create 2x2 matrices
+
+outputM = np.zeros()
+np.insert(outputM, 2, [2,4,6], axis=1)
+
+# OUTPUTS
+array([[ 0.,  0.,  2.,  0.,  0.],
+       [ 0.,  0.,  4.,  0.,  0.],
+       [ 0.,  0.,  6.,  0.,  0.]])
+
+
+a=[]
+np.append(a, [3,4,5], order='F')
+# appends a to the end
+
+a.flatten()
+# flattens the matrix to an array
+
+np.mean(yellowPixels[:,:,0])
+# gives the average of all rows, all columns, and the first of the tuples. 
+#This is for an RGB average. Specifically, "Red"
 
 blueMin = np.min(yellowPixels[:,:,2])
 redMax = np.max(yellowPixels[:,:,0])
@@ -614,10 +638,15 @@ area = np.concatenate((redcol, greencol, bluecol), axis=2)
 np.isfinite(Rover.vel)
 # returns a boolean value for if the inputted value is finite
 
+np.dot(a,b)
+# returns the dot product of a,b
+
+np.matmul(a,b)
+# does matrix multiplication on a,b
 
 
 
-######################################### SYMPY MODULE - MATRIX MANIPULATION ############################
+#################################################################### SYMPY MODULE - MATRIX MANIPULATION ########################################################
 
 # "SymPy is a full-featured computer algebra system (CAS) that will enable you to construct and 
 # manipulate matrices symbolically and then numerically evaluate them when needed."
@@ -815,6 +844,58 @@ eyes = eye_cascade.detectMultiScale(roi_gray)
         
 for (ex,ey,ew,eh) in eyes:
     eye = cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+
+
+
+
+#################################################################### TENSORFLOW MODULES ########################################################
+
+import tensorflow as tf
+
+C = tf.constant([ [123,456,789], [222,333,444] ])
+# Data in tensorflow are inside objects called 'Tensors'. The above is a constant type
+
+hello_constant = tf.constant('Hello World!')
+
+# A tensorflow session is created with, and ran:
+with tf.Session() as sess:
+    output = sess.run(hello_constant)
+    print(output)
+
+# Placeholders can be used to feed data to at a later time
+x = tf.placeholder(tf.string)
+
+with tf.Session() as sess:
+    output = sess.run(x, feed_dict={x: 'Hello World'})
+
+
+# Can set different types of placeholders
+x = tf.placeholder(tf.string)
+y = tf.placeholder(tf.int32)
+z = tf.placeholder(tf.float32)
+
+with tf.Session() as sess:
+    output = sess.run(x, feed_dict={x: 'Test String', y: 123, z: 45.67})
+
+# Add in TF
+x = tf.add(5, 2)  # 7
+
+# Subtract
+x = tf.subtract(10, 4) # 6
+
+# Multiply
+y = tf.multiply(2, 5)  # 10
+
+# Cast as the same datatype so no error occurs
+tf.subtract(tf.cast(tf.constant(2.0), tf.int32), tf.constant(1))   # 1
+
+# Do some math and print the output:
+x = tf.constant(10)
+y = tf.constant(2)
+z = tf.subtract(tf.divide(x,y),tf.cast(tf.constant(1), tf.float64))
+with tf.Session() as sess:
+    output = sess.run(z)
+    print(output)
 
 
 
