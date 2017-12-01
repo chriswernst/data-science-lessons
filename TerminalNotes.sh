@@ -1,7 +1,7 @@
 # Terminal Notes
 
 # Adopted from 0nn0's 'Terminal Cheatsheet for Mac':  https://github.com/0nn0/terminal-mac-cheatsheet
-# These commands also work correctly on Linux
+# If neither OSX or Linux is stated in the comment below the command, then it *SHOULD* be universal for both
 
 ### CORE COMMANDS
 
@@ -29,16 +29,24 @@ sudo [command]
 # Run command with the security privileges of the superuser (Super User DO)
 open [file]
 # Opens a file ( as if you double clicked it )
+open .
+# Opens the current wd in a GUI
 top
 # Displays active processes. Press q to quit
 nano [file]
-# Opens the file using the nano editor
+# Opens the file using the nano editor(use vi or vim on Linux)
 vim [file]
 # Opens the file using the vim editor
 clear
 # Clear screen
 reset
 # Resets the terminal display
+whoami
+# Returns the username
+/sbin/shutdown -r now
+# Restart Linux
+/sbin/shutdown -h now
+# Shutdown Linux
 
 
 ### FILE MANAGEMENT
@@ -57,6 +65,8 @@ cd ../../
 # Move 2 levels up
 cat
 # Concatenate to screen
+rm -rf ~/.local/share/Trash/*
+# Empty the trash on Linux Ubuntu
 rm [file]
 # Remove a file, e.g. rm data.tmp
 rm ‐i [file]
@@ -71,6 +81,8 @@ cp [file] [dir]
 # Copy file to directory
 mv [file] [new filename]
 # Move/Rename, e.g. mv file1.ad /tmp
+find . -type f -size +10M
+# Find files larger than 10MB
  pbcopy < [file]
 # Copies file contents to clipboard
 pbpaste
@@ -99,15 +111,26 @@ diskutil list
 # Lists the hard drives
 sudo dd if=/dev/disk2 of=~/Desktop/raspberrypi.dmg
 # Clones the sd card at 'disk2', and saves it as 'raspberrypi.dmg' on the desktop
+ifconfig
+# Gives a long version of IP Adrres on Mac OSX
 hostname -I
 # Gives the IP address on Linux
 ssh pi@192.XXX.X.XX
 # From a Mac/Linux machine, to create a secure shell login
 scp UserName@192.XXX.X.XX:/User/Name/of/Host/Path/filename.py ~/Path/of/destination/
 # To pull files from the host machine to the destination
-
-
-
+ioreg -p IOUSB
+# List USB Devices (Long)
+ioreg -p IOUSB -w0 -l
+# List USB Devices (Trimmed)
+ioreg -p IOUSB -w0 | sed 's/[^o]*o //; s/@.*$//' | grep -v '^Root.*'
+# List USB Devices - just names
+system_profiler SPUSBDataType
+# Another long form to call usb ports
+lsusb
+# list USB Devices(Linux Only)
+df -h
+# Free Disc Space
 
 
 
@@ -158,7 +181,7 @@ Ctrl + Y
 Ctrl + H
 # Same as backspace
 Ctrl + C
-# Kill whatever you are running
+# Kill whatever you are running on OSX. Ctrl + Z works on Linux
 Ctrl + D
 # Exit the current shell when no process is running, or send EOF to a the running process
 Ctrl + Z
@@ -259,8 +282,8 @@ apropos [search‐pattern]
 # Searches for command with keywords in description
 
 
-
-
+# Change scrolling to natural on Linux Only
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 
 
 ### EDITING IN TERMINAL
@@ -270,10 +293,16 @@ i #begins insertion of text
 # Press 'ESC' key
 :w # then 'Enter' writes the file
 :q # then 'Enter' quits the file
+:wq # writes and quits
 
 
 ##### SPECIFIC APPLICATIONS
 
+### KAZAM on Linux - For Screencast/Screenshots
+kazam
+# Launches the app - stop recording in the upper right corner
+kazam -p 
+# Launches preferences for where to store videos/etc
 
 ###  PYTHON
 

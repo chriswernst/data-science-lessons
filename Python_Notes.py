@@ -574,12 +574,30 @@ a=[]
 np.append(a, [3,4,5], order='F')
 # appends a to the end
 
+np.arange(start,stop,step)
+np.arange(3,300,5)
+# creates an array that starts at 3, and ends at 300, in 5 step increments
+
+np.linspace(start, stop, num)
+np.linspace(3,5,10)
+# Very similar to np.arange, but steps in exactly even spaces between the start and the stop values, exactly num times
+
 a.flatten()
 # flattens the matrix to an array
+
+np.where(condition)
+# Where
+a=[12, 15,  0,  9,  3]
+np.where(a>8)
+a=np.where(a>8,-66,a)
+# Determines the position is true, and if desired, replaces all of those instances
 
 np.mean(yellowPixels[:,:,0])
 # gives the average of all rows, all columns, and the first of the tuples. 
 #This is for an RGB average. Specifically, "Red"
+
+np.exp(1)
+# Exponential of the number or array
 
 blueMin = np.min(yellowPixels[:,:,2])
 redMax = np.max(yellowPixels[:,:,0])
@@ -644,7 +662,12 @@ np.dot(a,b)
 np.matmul(a,b)
 # does matrix multiplication on a,b
 
+np.ones([5,5])
+np.zeros([10,20])
+# Populates the given shape of matrix with zeros or ones
 
+np.empty([2,2])
+# Another option instead of zeros
 
 #################################################################### SYMPY MODULE - MATRIX MANIPULATION ########################################################
 
@@ -896,6 +919,20 @@ z = tf.subtract(tf.divide(x,y),tf.cast(tf.constant(1), tf.float64))
 with tf.Session() as sess:
     output = sess.run(z)
     print(output)
+
+
+# Matrices
+# Put together the y=Wx+b equation:    
+matW = tf.constant([[-0.5,0.2,0.1],[0.7,-0.8,0.2]])
+matX = tf.constant([  [0.2], [0.5], [0.6]  ])
+b = tf.constant([[0.1],[0.2]])
+prod = tf.matmul(matW,matX)
+sum1 = tf.add(prod,b)
+
+with tf.Session() as sess:
+    output = sess.run(sum1)
+    print(output)
+
 
 
 
@@ -1349,9 +1386,27 @@ soupSurfPage = bs4.BeautifulSoup(surf.text, "lxml")
 soupTidePage = bs4.BeautifulSoup(tides.text, "lxml")        
 # creates a beautiful soup object in lxml format
 
+# find_all
+links = []
+for i in soup.find_all('a'):
+    print(i.get('href'))
+    links.append(i.get('href'))
 
 
 
+
+######################################################################### LXML LIBRARY ##########################
+from lxml import html
+
+
+page = requests.get('https://www.builtinla.com/jobs?f[0]=job-category_marketing&f[1]=job-category_product')
+
+tree = html.fromstring(page.content)
+
+# This will create a list of job titles, hopefully!
+title = tree.xpath('//h2[@class="title"]/text()')
+
+location = tree.xpath('//div[@class="job-location"]/text()')
 
 
 
