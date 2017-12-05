@@ -1,21 +1,11 @@
-# Putting it all together - Your first program
-##### December 5, 2017
-###### by Chris Ernst
-###
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 30 20:28:42 2017
 
-### Modules we may use(not exhaustive):
-1. numpy (to analyze numbers / handle data)
-2. os (to set directories)
-3. matplotlib (to graph/plot)
-4. Pandas (to export as csv/analyze data)
-5. csv (to export as csv)
-6. smptplib (for sending emails)
-7. bs4 (for sorting through html)
-8. requests (for pulling html pages)
-9. lxml (for parsing html)
+@author: ChrisErnst
+"""
 
-##### Where we left off:
-```
 import requests
 import bs4
 from lxml import html
@@ -50,4 +40,10 @@ for i in range(5):
     
     soup = BeautifulSoup(page.text, 'html.parser')
     # Parse with bs4
-```
+
+
+
+
+
+
+
