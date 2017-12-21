@@ -1,12 +1,11 @@
 '''
 PYTHON 3.5 NOTES
 
-Last Updated 10/19/2017
+Last Updated 12/20/2017
 
 Might want to use Spyder 3.5 or iPython in order to have access to all libraries
   - and DON'T use pip3 to update libraries when using Anaconda
 
-http://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3
 
 '''
 
@@ -162,6 +161,16 @@ b2
   Out[228]: array([6, 7, 8])
 
 
+test = 'hello'
+TEST = 'HELLO'
+TEST.lower()
+# Outputs 'hello'
+
+test.capitalize()
+# Outputs 'Hello' - Capitalizes the first letter
+
+
+
 #################################### PYTHON KEYWORDS  ##################
 
 # To get a list of keywords:
@@ -196,6 +205,8 @@ subSet = set(subList)
 subSet <= setTest 
 # Will return TRUE
 
+hist -n
+# Returns a history of python commands for the session
 ################################ MODULES / LIBRARIES ################################
 
 import numpy
@@ -1026,6 +1037,63 @@ payscale.fetchall()
 
 
 
+# Create table
+c.execute('''CREATE TABLE item_location
+             (date text, trans text, symbol text, qty real, price real)''')
+# SQL CREATE TABLE builds a SQLtable. The syntax is:
+
+# CREATE TABLE table_name (
+#     column1 datatype,
+#     column2 datatype,
+#     column3 datatype,
+#    ....
+# );
+#
+# Examples of datatypes are: CHARACTER [(length)] or CHAR [(length)]
+# VARCHAR (length)
+# BOOLEAN
+# SMALLINT
+# INTEGER or INT
+# DECIMAL [(p[,s])] or DEC [(p[,s])]
+# NUMERIC [(p[,s])]
+# REAL
+# FLOAT(p)
+# DOUBLE PRECISION
+# DATE
+# TIME
+# TIMESTAMP
+# CLOB [(length)] or CHARACTER LARGE OBJECT [(length)] or CHAR LARGE OBJECT [(length)]
+# BLOB [(length)] or BINARY LARGE OBJECT [(length)]varchar(255), int, 
+
+test_records = [('cereal', 8),
+                ('oatmeal',8),
+                ('tomatoes',20),
+                ('frozen foods',2),
+                ('meat',2),
+                ('cheese',3),
+                ('milk',3),
+                ('bread',18),
+                ('soda',16),
+                ('bananas',20),
+                ('toothpaste',5),
+                ('toilet paper',5),
+               ]
+
+
+c.executemany('INSERT INTO item_location VALUES (?,?)', test_records)
+
+# Save (commit) the changes
+conn.commit()
+
+# Find those products that start with 'bana'       
+c.execute('SELECT location FROM item_location \
+                     WHERE product LIKE "bana%"')
+# Print the result
+aisle = c.fetchall()
+
+# Learn mroe about SQL wildcards here: https://www.w3schools.com/sql/sql_wildcards.asp
+
+
 
 ############################################################### GLOB MODULE ##########################
 import glob
@@ -1506,6 +1574,72 @@ Text(Point(20, 15), '$').draw(win)
 # X Axis
 Text(Point(780,585), 'MW').draw(win)
 
+
+
+
+
+######################################################################### FLASK LIBRARY ##########################
+
+# Used for Web Development
+
+from flask import Flask
+
+
+app = Flask(__name__)
+# Flask library helps with web deployment. Learn more at: http://flask.pocoo.org/
+
+@app.route("/")
+
+def test():
+	return 'hello world'
+
+# Open a terminal and type:
+    # FLASK_APP=hello.py flask run
+
+    # Example of use:
+
+    def findGrowthJobs():
+    
+    page = requests.get('https://www.builtinla.com/jobs?f[0]=job-category_marketing&f[1]=job-category_product')
+
+    soup = BeautifulSoup(page.text, 'html.parser')
+    
+    tree = html.fromstring(page.content)
+    
+    # This will create a list of job titles, hopefully!
+    title = tree.xpath('//h2[@class="title"]/text()')
+    
+    location = tree.xpath('//div[@class="job-location"]/text()')
+    
+    links = []
+    
+    for i in soup.find_all('a'):
+        print(i.get('href'))
+        links.append(i.get('href'))
+    
+    
+    # fnmatch.filter(['baba', 'nono', 'papa', 'mama', 'nostradamus'], 'no*')
+    # This is a filter for the below
+    test = links[97:137] # CHANGE THIS
+    # CHANGE THIS ASAP
+    
+    prefix = 'https://www.builtinla.com'    
+    
+    urlName = (prefix + test[3])
+    
+    welcome = '<center><br><H1>Welcome to MuchGrowth.com!<br><br></H1>'
+    
+    firstListing = ("<H3><br><br>Click <a href=" + urlName + ">here</a> to go to the first growth job listing.</center></H3>")
+    
+    fullHtml = welcome + firstListing
+    return fullHtml
+
+
+
+
+################################ pyaudio ##########################################
+
+# http://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3
 
 
 
