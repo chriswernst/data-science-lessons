@@ -107,5 +107,5 @@ df.to_csv(fileName, index=False)
 
 print("\nSaved Successfully to: " + fileSaveDir + "/" + fileName)
 
-email_client(fileName, 'deenrcp@gmail.com')
+email_client(fileName, 'email@gmail.com')
 
