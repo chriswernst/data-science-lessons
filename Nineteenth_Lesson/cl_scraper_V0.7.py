@@ -35,7 +35,7 @@ linkList = []
 ourResultMatrix=[]
 # Generate an empty list for the links
 
-delay = 5
+delay = 10
 # Time delay so our IP doesn't get blocked by Craigslist
 
 print("Searching vehicles from", inputFileName, "\n\n")
@@ -82,7 +82,8 @@ for j in range(len(inputData)):
             # Seventh Column - Posting Date and Time
             temp = newBlockLong[i].find('time', href=False).get('datetime')
             diff = pd.to_datetime(temp) - pd.Timestamp.today()
-            ourResultMatrix.append(diff)
+            diffInt = int(str(diff)[:3])
+            ourResultMatrix.append(diffInt)
             # Eighth Column - Listing Age (Post date - Current Time)    
         except:
             continue
@@ -99,7 +100,7 @@ ourResultMatrix = np.reshape(ourResultMatrix, [numRows, numColumns])
 print("\n\n PROCESSING COMPLETE. YOUR MATRIX IS READY.")
 print("\nThere are", len(ourResultMatrix), "results")
 
-df = pd.DataFrame(data=ourResultMatrix, columns=['Location', 'Title', 'Year','Model', 'Price', 'URL', 'Post_Date', 'Posting_Age']) #.sort_values('Posting_Age', ascending=False)
+df = pd.DataFrame(data=ourResultMatrix, columns=['Location', 'Title', 'Year','Model', 'Price', 'URL', 'Post_Date', 'Posting_Age']).sort_values('Posting_Age', ascending=False)
 # Create a pandas dataframe so we can export to csv
 
 fileName = 'cl_scraper_data' + '.csv'
