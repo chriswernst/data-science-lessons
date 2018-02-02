@@ -47,7 +47,14 @@ whoami
 # Restart Linux
 /sbin/shutdown -h now
 # Shutdown Linux
-
+curl -O www.domain.com/path/to/file/filename.mat 
+# Download a file on OSX
+wget www.domain.com/path/to/file/filename.mat 
+# Download a file on Linux
+lsb_release -a
+# Gives the linux version
+rosversion -d
+# Gives the version of ROS
 
 ### FILE MANAGEMENT
 
@@ -119,6 +126,8 @@ ssh pi@192.XXX.X.XX
 # From a Mac/Linux machine, to create a secure shell login
 scp UserName@192.XXX.X.XX:/User/Name/of/Host/Path/filename.py ~/Path/of/destination/
 # To pull files from the host machine to the destination
+scp -i ~/Path/to/PEMfile/AWS.pem ubuntu@ec2-54-201-28-201.us-west-2.compute.amazonaws.com:~/fast-style-transfer/test/* ~/Development/Python/style_transfer/fast-style-transfer/data/AWS_output/
+# AWS command ran from local OSX terminal  - This command will download a file:~/fast-style-transfer/test/*  from Amazon instance to your ~/Development/Python/ folder in your laptop.
 ioreg -p IOUSB
 # List USB Devices (Long)
 ioreg -p IOUSB -w0 -l
@@ -149,7 +158,7 @@ ls -a ~
 # Find .bash_profile, open in text editor
 # This is ran each time a new shell (terminal) window is opened
 
-export PATH="Users/ChrisErnst:$PATH"
+export PATH="Users/UserName:$PATH"
 # The above line could be added to the text file if that path contained executable files
 # The command export PATH=/usr/local/bin:$PATH 
 # prepends the directory /usr/local/bin to the current PATH, 
@@ -304,6 +313,19 @@ kazam
 kazam -p 
 # Launches preferences for where to store videos/etc
 
+### SUBLIME 
+# on Linux
+subl fileName.cpp
+# To get this working on OSX (10.13.2 High Sierra):
+# in terminal, run:
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+# Then
+subl .
+# OR
+subl fileName.cpp
+
+
+
 ###  PYTHON
 
 python scriptName.py 
@@ -322,8 +344,16 @@ git pull origin master --allow-unrelated-histories
 
 ###  ANACONDA
 conda update conda
-
-
+conda info --envs # list the virtual environments
+conda create --name myEnvironment pyhton=3 # creates a new virtual environment named myEnvironment
+source activate myEnvironment # activates that virtual environment
+conda install -c anaconda django # downloads django into the virtualEnv
+pip freeze # Lists the packages inside that environment
+source deactivate # exits from the current virtualenv
+cd /Users/UserName/anaconda3/envs/myEnvironment # cd into where our virtual environments are located
+mkdir src && cd src
+django-admin startproject ecommerce . # This starts a project in the current directory and will output an 'ecommerce' folder(the name of our project), and a 'manage.py' script
+python manage.py runserver # Runs the server for django
 
 ### HOMEBREW
 

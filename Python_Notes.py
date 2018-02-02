@@ -1,7 +1,7 @@
 '''
 PYTHON 3.5 NOTES
 
-Last Updated 12/20/2017
+Last Updated 10/19/2017
 
 Might want to use Spyder 3.5 or iPython in order to have access to all libraries
   - and DON'T use pip3 to update libraries when using Anaconda
@@ -207,6 +207,24 @@ subSet <= setTest
 
 hist -n
 # Returns a history of python commands for the session
+
+# Filter for specific elements
+testList = ['hello', None, None]
+
+testList = list(filter(None, testList))
+
+# Find items in a list
+a=[3,5,8,9,22,3,18]
+
+a.index(3)
+# Returns 0 for the first position
+
+# Find items in multiple locations
+for i, j in enumerate([a]):
+    if j == 3:
+        print(i)
+# Returns 0, and 5 for both positions 3 is located
+
 ################################ MODULES / LIBRARIES ################################
 
 import numpy
@@ -558,6 +576,23 @@ y_arrow = arrow_length * np.sin(avg_angle)
 plt.arrow(0, 0, x_arrow, y_arrow, color='red', zorder=2, head_width=10, width=2)
 plt.show()
 
+# Create a pie chart
+labels = ['I have a lawn', 'I do not have a lawn']
+sizes = [45.5, 54.5]
+colors = ['#4FB017', '#669900']
+patches, texts = plt.pie(sizes, explode=[0.03,0.03],colors=colors, shadow=True, startangle=90)
+plt.legend(patches, labels, loc="best")
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
+
+# Remove x and y labels
+plt.xlabel('') # remove x and y labels
+plt.ylabel('') # remove x and y labels
+
+# Save fig
+plt.savefig('ocean_r.png')
+# ocean_r
 
 
 
@@ -970,6 +1005,36 @@ import pandas as pd
 df = pd.read_csv('../test_dataset/robot_log.csv', delimiter=';', decimal='.')
 
 
+df = pd.unique(emailList)    
+dfUnique = pd.DataFrame(data=df, columns=['Unique Etsy Emails'])
+# Create a pandas dataframe
+
+fileName = 'email-list_' + today + '.csv'
+dfUnique.to_csv(fileName, index=False)
+
+
+dfHelpful = pd.DataFrame(data=dataset, columns=['Program Portion', 'Helpfulness', 'Response Count'], dtype=int)
+
+dfHelpfulPivot = dfHelpful.pivot('Program Portion', 'Helpfulness', 'Response Count')
+
+# REORDER ROWS
+dfHelpfulPivot =  dfHelpfulPivot.reindex(['Applying',
+                                         'Determining eligibility',
+                                         'Getting initial landscape information',
+                                         'Technical assistance',
+                                         'Understanding and complying with program requirements',
+                                         'Plant, design and layout choices',
+                                         'Sprinkler, timer or other watering choices',
+                                         'Choosing a contractor',
+                                         'Landscape installation',
+                                         'Landscape maintenance'])
+
+# REORDER COLS
+cols = dfHelpfulPivot.columns.tolist()
+cols = [cols[3], cols[2], cols[1],cols[4],cols[0]]
+
+dfHelpfulPivot =  dfHelpfulPivot[cols]
+
 
 
 
@@ -998,6 +1063,10 @@ print(end -  start)
 
 import datetime
 
+today = str(datetime.date.today())
+
+fileName = 'email-list_' + today + '.csv'
+
 datetime.datetime.now().time()
 # outputs just time
 
@@ -1015,7 +1084,7 @@ datetime.datetime.utcnow()
 ######################################################## SQLite3 MODULE ####################
 
 from sqlite3 import connect
-conn = connect(r'/Users/ChrisErnst/temp.db')
+conn = connect(r'/Users/Username/temp.db')
 # generates a .db file
 
 curs = conn.cursor()
@@ -1576,6 +1645,19 @@ Text(Point(780,585), 'MW').draw(win)
 
 
 
+######################################################################### DJANGO LIBRARY ##########################
+# Most notes taken from Udemy course: Coding for Entrepreneurs
+
+conda info --envs # lists the virtualenvs for anaconda. These are located in Anaconda3/envs/
+
+source activate django_env1 # Start the virtualenv we created earlier
+pip freeze # shows the packages installed
+
+cd /Users/UserName/anaconda3/envs/django_env1 # cd into where the environment is
+# In this directory you should see bin, lib, and include folders
+mkdir src && cd src
+django-admin startproject ecommerce . # This starts a project in the current directory and will output an 'ecommerce' folder(the name of our project), and a 'manage.py' script
+python manage.py runserver # runs the server
 
 
 ######################################################################### FLASK LIBRARY ##########################
@@ -1636,10 +1718,166 @@ def test():
 
 
 
+######################################################################### JSON LIBRARY ##########################
+
+
+
+#JSON EXAMPLE
+json_string = '{"first_name": "Guido", "last_name":"Rossum"}'
+type(json_string)
+# Creates a string
+
+parsed_json = json.loads(json_string)
+type(parsed_json)
+# converts that into a dictionary
+
+print(parsed_json['first_name'])
+# Which can then be parsed
+
+# Can also convert to JSON
+d = {
+    'first_name': 'Guido',
+    'second_name': 'Rossum',
+    'titles': ['BDFL', 'Developer'],
+}
+type(d) # Is dictionary type
+
+# Convert to double quotes
+print(json.dumps(d))
+
+
+
+######################################################################### SMTP LIBRARY ##########################
+# For sending emails with Python
+
+
+
+def email_client(attachFile):
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email import encoders
+    from email.mime.base import MIMEBase
+
+    
+    try:
+        server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        server_ssl.ehlo() # optional, called by login()
+        MY_ADDRESS = input('Please Enter Email Address: ')
+        PASSWORD = input('Please Enter Password: ')
+        server_ssl.login(MY_ADDRESS, PASSWORD)  
+        
+        
+        msg = MIMEMultipart()
+        msg['Subject'] = "Craigslist Data" 
+        msg['From'] = "from@email.com"
+        msg['To'] =  "to@email.com"
+        msg['Text'] = "Here is the latest data"
+    
+    
+        part = MIMEBase('application', "octet-stream")
+        part.set_payload(open(attachFile, "rb").read())
+        encoders.encode_base64(part)
+    
+        part.add_header('Content-Disposition', 'attachment', filename='TheFileName.csv')
+    
+        msg.attach(part)
+    
+        server_ssl.sendmail(MY_ADDRESS, MY_ADDRESS, msg.as_string())
+        server_ssl.close()
+        print('\n\nSuccessfully sent the email!')
+
+        
+    except:
+        print('an error occured')
+    
+            
+        
+
+
 
 ################################ pyaudio ##########################################
 
 # http://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3
+
+
+
+
+########################################### SEABORN ##########################################
+
+# https://seaborn.pydata.org/tutorial/color_palettes.html#palette-tutorial
+
+
+%matplotlib
+# %matplotlib inline # to print plots in the prompt
+
+import numpy as np
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# https://seaborn.pydata.org/tutorial/aesthetics.html
+
+np.random.seed(sum(map(ord, "aesthetics")))
+
+def sinplot(flip=1):
+    x = np.linspace(0, 14, 100)
+    for i in range(1, 7):
+        plt.plot(x, np.sin(x + i * .5) * (7 - i) * flip)
+        
+sinplot()  # plots as white, full box around, tickmarks
+
+sns.set() # Sets seaborn defaults
+sinplot() 
+
+sns.set_style("white") # changes background to white no tickmarks
+sinplot() 
+
+
+# My preferred aesthetic is:
+sns.set_style("white") # changes background to white no tickmarks
+sinplot()
+sns.despine() # Removes spines from upper and right
+
+# Despine select areas
+sns.despine() # Removes top and right spines
+sns.despine(left=True, bottom=True) # Removes left and bottom spines
+
+
+# Gives temporary style
+with sns.axes_style("darkgrid"):
+    plt.subplot(211)
+    sinplot()
+with sns.axes_style("white"):    
+    plt.subplot(212)
+    sinplot(-1)
+    sns.despine()
+
+
+# Sequential “cubehelix” palettes
+sns.palplot(sns.color_palette("cubehelix", 8))
+sns.palplot(sns.cubehelix_palette(8))
+sns.palplot(sns.cubehelix_palette(8, start=.1, rot=-.75)) # 8 colors, start is between 0-3, rot is between -1 and 1
+sns.palplot(sns.cubehelix_palette(8, start=2, rot=0, dark=0, light=.95, reverse=True)) # Reverse the ordering
+
+
+# Create topical maps
+x, y = np.random.multivariate_normal([0, 0], [[1, -.5], [-.5, 1]], size=300).T
+cmap = sns.cubehelix_palette(light=1, as_cmap=True)
+sns.kdeplot(x, y, cmap=cmap, shade=True)
+
+
+# HEATMAP
+sns.set_context("notebook")
+
+sns.set()
+sns.set_palette("Blues")
+heatmat = sns.heatmap(dfHelpfulPivot, cmap="ocean_r",center=300, annot=True, fmt="d", linewidths=0.8, square=False,  xticklabels=False, yticklabels=False)
+
+plt.xlabel('') # remove x and y labels
+plt.ylabel('') # remove x and y labels
+
+plt.savefig('ocean_r.png')
+# ocean_r
 
 
 
