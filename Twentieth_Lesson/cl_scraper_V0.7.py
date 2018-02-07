@@ -1,12 +1,16 @@
-# Finishing Your first program
-##### February 8, 2018
-###
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 30 20:28:42 2017
+
+@author: ChrisErnst
+
+See utilities.py for useful functions this script uses; as well as appendix.py for unused functions
+
+Add san diego, inland empire, orange county, palm springs
 
 
-##### Where we left off (V7):
-```
-
-
+"""
 
 import requests
 # For http requests from the internet
@@ -110,5 +114,3 @@ print("\nSaved Successfully to: " + fileSaveDir + "/" + fileName)
 
 email_client(fileName, 'email@gmail.com')
 
-
-```
