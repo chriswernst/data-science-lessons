@@ -12,9 +12,20 @@ def add_link(year, model='civic'):
         model = str(model)
         year =  str(year)
         # Convert to strings
-        link = ('https://losangeles.craigslist.org/search/cto?query=%28' + year + '+' + model + '*%29+-salv*&srchType=T&bundleDuplicates=1&min_price=999&max_price=15000&min_auto_miles=999&max_auto_miles=110000&auto_title_status=1&auto_title_status=3&auto_title_status=4&auto_title_status=5&auto_title_status=6')
+        linkSuffix = '*%29+-salv*&srchType=T&bundleDuplicates=1&min_price=999&max_price=15000&min_auto_miles=999&max_auto_miles=110000&auto_title_status=1&auto_title_status=3&auto_title_status=4&auto_title_status=5&auto_title_status=6'
+        # LA
+        link1 = ('https://losangeles.craigslist.org/search/cto?query=%28' + year + '+' + model + linkSuffix)
+        # San Diego
+        link2 = ('https://sandiego.craigslist.org/search/cto?query=%28' + year + '+' + model + linkSuffix)
+        # IE
+        link3 = ('https://inlandempire.craigslist.org/search/cto?query=%28' + year + '+' + model + linkSuffix)
+        # Orange County
+        link4 = ('https://orangecounty.craigslist.org/search/cto?query=%28' + year + '+' + model + linkSuffix)
+        # Palm Springs
+        link5 = ('https://palmsprings.craigslist.org/search/cto?query=%28' + year + '+' + model + linkSuffix)
+
         # Build the link as a string         
-        return link
+        return link1, link2, link3, link4, link5
     except:
         print ("please make sure to use quotes around car model")
     
