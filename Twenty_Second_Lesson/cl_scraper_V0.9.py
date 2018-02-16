@@ -17,7 +17,7 @@ import requests
 from bs4 import BeautifulSoup
 # For parsing and creating soup objects
 import os
-fileSaveDir = '/Users/ChrisErnst/Development/data-science-lessons-di/Twenty_First_Lesson'
+fileSaveDir = '/Users/ChrisErnst/Development/data-science-lessons-di/Twenty_Second_Lesson'
 os.chdir(fileSaveDir)
 # Set the directory
 from utilities import add_link
@@ -79,7 +79,7 @@ for j in range(len(inputData)):
         print(".........sleeping.........")
         sleep(delay)
             
-        numColumns = 8 # For long term use, this should NOT be hardcoded...
+        numColumns = 9 # For long term use, this should NOT be hardcoded...
         for i in range(len(newBlockLong)):
             try:
                 # First column - Neighborhood
@@ -92,12 +92,13 @@ for j in range(len(inputData)):
                 ourResultMatrix.append(tempModel)
                 # Fifth Column - Price
                 ourResultMatrix.append((newBlockLong[i].find('span', 'result-price').text)[1:])
-                # Sixth Column - URL
+                # Sixth Column - Average Price
+                ourResultMatrix.append(inputData['Private_Price'][j])
+                # Seventh Column - URL
                 ourResultMatrix.append(newBlockLong[i].find('a', href=True).get('href'))
-                # Seventh Column - Posting Date and Time
+                # Eighth Column - Posting Date and Time
                 ourResultMatrix.append(newBlockLong[i].find('time', href=False).get('datetime'))
-                
-                # Eighth Column - Listing Age (Post date - Current Time)    
+                # Ninth Column - Listing Age (Post date - Current Time)    
                 temp = newBlockLong[i].find('time', href=False).get('datetime')
                 diff = pd.to_datetime(temp) - pd.Timestamp.today()
                 diffInt = int(str(diff)[1:3])
