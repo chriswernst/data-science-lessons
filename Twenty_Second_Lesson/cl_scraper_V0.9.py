@@ -117,16 +117,16 @@ ourResultMatrix = np.reshape(ourResultMatrix, [numRows, numColumns])
 print("\n\n PROCESSING COMPLETE. YOUR MATRIX IS READY.")
 print("\nThere are", len(ourResultMatrix), "results")
 
-df = pd.DataFrame(data=ourResultMatrix, columns=['Location', 'Title', 'Year','Model', 'Price', 'URL', 'Post_Date', 'Posting_Age']).apply(pd.to_numeric, errors='ignore').sort_values(['Posting_Age','Price'], ascending=True, kind='mergesort')
+df = pd.DataFrame(data=ourResultMatrix, columns=['Location', 'Title', 'Year','Model', 'Price', 'Avg_Price','URL', 'Post_Date', 'Posting_Age']).apply(pd.to_numeric, errors='ignore').sort_values(['Posting_Age','Price'], ascending=True, kind='mergesort')
 # Create a pandas dataframe so we can export to csv
 
 localAveragePrice = round(df['Price'].mean())
 # Get the local average price of the result set
 
-stdD = (df['Price'] - localAveragePrice)/localAveragePrice
+stdD = (df['Price'] - df['Avg_Price'])/df['Avg_Price']
 # Calculate the std dev
 
-df = df.assign(z_score=stdD).sort_values(['Posting_Age','Price', 'z_score'], ascending=True, kind='mergesort')
+df = df.assign(z_score=stdD).sort_values(['z_score', 'Posting_Age','Price', ], ascending=True, kind='mergesort')
 
 
 fileName = 'cl_scraper_data' + '.csv'
