@@ -3,13 +3,7 @@
 """
 Created on Thu Nov 30 20:28:42 2017
 
-@author: ChrisErnst
-
 See utilities.py for useful functions this script uses; as well as appendix.py for unused functions
-
-Add san diego, inland empire, orange county, palm springs
-
-
 """
 
 import requests
@@ -17,7 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 # For parsing and creating soup objects
 import os
-fileSaveDir = '/Users/ChrisErnst/Development/data-science-lessons-di/Twenty_Second_Lesson'
+fileSaveDir = '/Users/ChrisErnst/Development/data-science-lessons-di/Twenty_Third_Lesson'
 os.chdir(fileSaveDir)
 # Set the directory
 from utilities import add_link
